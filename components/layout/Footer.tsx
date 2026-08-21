@@ -6,17 +6,17 @@ const columns = [
   {
     title: "Explore",
     links: [
-      { href: "/about", label: "About" },
-      { href: "/productions", label: "Productions" },
-      { href: "/news", label: "News" }
+      { href: "/#", label: "About" },
+      { href: "/#", label: "Productions" },
+      { href: "/#", label: "News" }
     ]
   },
   {
     title: "Work With Us",
     links: [
-      { href: "/partners", label: "Partners & Sponsors" },
-      { href: "/careers", label: "Careers & Casting" },
-      { href: "/media-kit", label: "Media Kit" }
+      { href: "/#", label: "Partners & Sponsors" },
+      { href: "/#", label: "Careers & Casting" },
+      { href: "/#", label: "Media Kit" }
     ]
   }
 ];

@@ -136,7 +136,7 @@ export default function Hero() {
                 <Button href={slide.cta.href} variant="ghost" className="border-offwhite/25 font-normal">
                   {slide.cta.label}
                 </Button>
-                <Button href="/partners" variant="ghost" className="border-offwhite/10 font-normal text-offwhite/70">
+                <Button href="#" variant="ghost" className="border-offwhite/10 font-normal text-offwhite/70">
                   Partner With Us
                 </Button>
               </div>

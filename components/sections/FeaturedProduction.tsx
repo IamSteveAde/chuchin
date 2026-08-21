@@ -135,7 +135,7 @@ export default function FeaturedProduction() {
         >
           <p className="text-base font-light leading-relaxed text-offwhite/60">{flagship.synopsis}</p>
           <Link
-            href={`/productions/${flagship.slug}`}
+            href={`#`}
             className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-offwhite"
           >
             <span className="relative">

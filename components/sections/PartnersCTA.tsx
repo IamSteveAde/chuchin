@@ -66,7 +66,7 @@ export default function PartnersCTA() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, delay: 0.2, ease }}
         >
-          <Button href="/partners" variant="ghost">
+          <Button href="/#" variant="ghost">
             Partnership Opportunities
           </Button>
         </motion.div>

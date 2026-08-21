@@ -25,7 +25,7 @@ export const heroSlides: HeroSlide[] = [
     titleAccent: "Ultimate Productions",
     description:
       "An award-winning Nigerian production company creating films, dramas, and digital content that celebrate family, culture, and resilience.",
-    cta: { label: "Learn Our Story", href: "/about" },
+    cta: { label: "Learn Our Story", href: "/#" },
     image: "/images/hero/tot.png",
     imageMobile: "/images/hero/totm.png",
     imageLabel: "Chuchin Ultimate Productions",
@@ -38,7 +38,7 @@ export const heroSlides: HeroSlide[] = [
     titleAccent: "has an edge to find.",
     description:
       "Stellamaris Duru's masterclass for actors, filmmakers, screenwriters, and media entrepreneurs building a career in the industry.",
-    cta: { label: "Discover the Masterclass", href: "/careers#masterclass" },
+    cta: { label: "Discover the Masterclass", href: "/#" },
     image: "/images/hero/masterclass.png",
     imageMobile: "/images/hero/masterclassm.png",
     imageLabel: "The Main Character Journey — Still",
@@ -51,7 +51,7 @@ export const heroSlides: HeroSlide[] = [
     titleAccent: "carries the family forward.",
     description:
       "A Nollywood drama of love, ambition, and the loyalty that holds a family together across two acclaimed seasons.",
-    cta: { label: "Watch the Story", href: "/productions/sands-of-time" },
+    cta: { label: "Watch the Story", href: "/#" },
     image: "/images/hero/tot.png",
     imageMobile: "/images/hero/totm.png",
     imageLabel: "Sands of Time — Still",
@@ -64,7 +64,7 @@ export const heroSlides: HeroSlide[] = [
     titleAccent: "a city, a beginning.",
     description:
       "The season that opened Sands of Time to the world — ambition meeting the pull of home.",
-    cta: { label: "Explore Season One", href: "/productions/sands-of-time#affiong-go-lagos" },
+    cta: { label: "Explore Season One", href: "/#" },
     image: "/images/hero/agl.png",
     imageMobile: "/images/hero/aglm.png",
     imageLabel: "Affiong Go Lagos — Still",

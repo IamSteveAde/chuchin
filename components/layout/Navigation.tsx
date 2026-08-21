@@ -6,13 +6,13 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const links = [
-  { href: "/about", label: "About" },
-  { href: "/productions", label: "Productions" },
-  { href: "/news", label: "News" },
-  { href: "/partners", label: "Partners" },
-  { href: "/careers", label: "Careers" },
-  { href: "/media-kit", label: "Media Kit" },
-  { href: "/contact", label: "Contact" }
+  { href: "#", label: "About" },
+  { href: "#", label: "Productions" },
+ 
+  { href: "#", label: "Partners" },
+
+  { href: "#", label: "Media Kit" },
+  { href: "#", label: "Contact" }
 ];
 
 export default function Navigation() {
@@ -51,7 +51,7 @@ export default function Navigation() {
         })}
 
         <Link
-          href="/partners"
+          href="#"
           className="ml-2 rounded-full bg-gradient-to-r from-orange to-gold px-5 py-2 text-sm font-semibold text-charcoal transition-transform duration-300 ease-cinematic hover:scale-105 hover:shadow-[0_6px_20px_-4px_rgba(244,102,30,0.55)]"
         >
           Partner With Us

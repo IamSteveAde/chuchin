@@ -89,7 +89,7 @@ export default function FounderSpotlight() {
 
           <p className="mt-7 max-w-xl text-base font-light leading-relaxed text-charcoal/65">{founder.bio}</p>
 
-          <Link href="/about" className="group mt-9 inline-flex items-center gap-2 text-sm font-medium text-charcoal">
+          <Link href="/#" className="group mt-9 inline-flex items-center gap-2 text-sm font-medium text-charcoal">
             <span className="relative">
               Read Full Story
               <span className="absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 bg-charcoal transition-transform duration-300 ease-cinematic group-hover:scale-x-100" />
