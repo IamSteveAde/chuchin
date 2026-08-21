@@ -21,14 +21,21 @@ export default function Header() {
       setSolid(true);
       return;
     }
-    const onScroll = () => setSolid(window.scrollY > 40);
+    // Reads from multiple sources — some mobile/older browsers don't update
+    // window.scrollY consistently, so this falls back to document scrollTop.
+    const getScrollY = () =>
+      window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const onScroll = () => setSolid(getScrollY() > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHome]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 pt-4 sm:pt-6">
+    <header
+      className="fixed inset-x-0 top-0 isolate z-[999] pt-4 sm:pt-6"
+      style={{ transform: "translateZ(0)", WebkitTransform: "translateZ(0)" }}
+    >
       {/* Same container-page wrapper as every page section, so the logo and
           nav line up exactly with the hero headline and content below — on
           both mobile and desktop. */}
@@ -43,7 +50,7 @@ export default function Header() {
           <Link href="/" className="flex items-center">
             {/* Two real assets, swapped by state — no CSS filter trick. */}
             <Image
-              src={solid ? "/images/logos/logw.png" : "/images/logos/logw.png"}
+              src={solid ? "/images/logos/log.png" : "/images/logos/logw.png"}
               alt="Chuchin Ultimate Productions Ltd."
               width={160}
               height={48}
