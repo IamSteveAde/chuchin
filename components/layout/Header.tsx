@@ -50,7 +50,7 @@ export default function Header() {
           <Link href="/" className="flex items-center">
             {/* Two real assets, swapped by state — no CSS filter trick. */}
             <Image
-              src={solid ? "/images/logos/log.png" : "/images/logos/logw.png"}
+              src={solid ? "/images/logos/logw.png" : "/images/logos/logw.png"}
               alt="Chuchin Ultimate Productions Ltd."
               width={160}
               height={48}
