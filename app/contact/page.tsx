@@ -479,10 +479,10 @@ export default function ContactPage() {
             className="relative h-full w-full"
           >
             <picture className="absolute inset-0 block h-full w-full">
-              <source media="(max-width: 767px)" srcSet="/images/hero/chuchinm.png" />
+              <source media="(max-width: 767px)" srcSet="/images/hero/contact.png" />
               {/* eslint-disable-next-line @next/next/no-img-element -- native <picture>/<source>
                   art direction isn't supported by next/image; matches the homepage hero. */}
-              <img src="/images/hero/chuchin.png" alt="Chuchin Ultimate Productions" className="h-full w-full object-cover object-center" />
+              <img src="/images/hero/contact.png" alt="Chuchin Ultimate Productions" className="h-full w-full object-cover object-center" />
             </picture>
           </motion.div>
 
