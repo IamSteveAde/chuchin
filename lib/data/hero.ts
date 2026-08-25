@@ -9,7 +9,7 @@ export type HeroSlide = {
    *  e.g. /images/hero/tot.png. */
   image?: string;
   /** Mobile / portrait crop of the same still. Same filename with an "m"
-   *  appended before the extension, e.g. /images/hero/totm.png. Swapped in
+   *  appended before the extension, e.g. /images/hero/tot.png. Swapped in
    *  below 768px via a <picture><source media> so the browser only ever
    *  downloads the one it needs — never both. */
   imageMobile?: string;

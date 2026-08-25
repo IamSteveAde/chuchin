@@ -391,7 +391,7 @@ export default function PartnersPage() {
             className="relative h-full w-full"
           >
             <picture className="absolute inset-0 block h-full w-full">
-              <source media="(max-width: 767px)" srcSet="/images/hero/totm.png" />
+              <source media="(max-width: 767px)" srcSet="/images/hero/tot.png" />
               {/* eslint-disable-next-line @next/next/no-img-element -- native <picture>/<source>
                   art direction isn't supported by next/image; matches the homepage hero. */}
               <img src="/images/hero/tot.png" alt="Sands of Time" className="h-full w-full object-cover" />
@@ -565,7 +565,7 @@ export default function PartnersPage() {
               {/* eslint-disable-next-line @next/next/no-img-element -- decorative
                   contained panel image, not the pinned hero background. */}
               <img
-                src="/images/hero/totm.png"
+                src="/images/hero/tot.png"
                 alt=""
                 className="absolute inset-0 h-full w-full object-cover"
               />

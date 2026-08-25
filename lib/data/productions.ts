@@ -77,19 +77,19 @@ export const productions: Production[] = [
       "Selected — Best Television Series (Drama), BINFF"
     ],
     broadcastSchedule: [
-      { network: "RSTV PH", day: "Monday", time: "7:00–7:30PM", logo: "/images/networks/rstv-ph.png" },
-      { network: "ITV Benin", day: "Monday", time: "9:30–10:00PM", logo: "/images/networks/itv-benin.png" },
-      { network: "EBS TV", day: "Monday", time: "12:00–12:30PM", logo: "/images/networks/ebs-tv.png" },
-      { network: "OGTV", day: "Tuesday", time: "7:30–8:00PM", logo: "/images/networks/ogtv.png" },
-      { network: "TVC", day: "Tuesday", time: "8:00–8:30PM", logo: "/images/networks/tvc.png" },
-      { network: "ITV Abuja", day: "Tuesday", time: "8:30–9:00PM", logo: "/images/networks/itv-abuja.png" },
-      { network: "NTA2CH5", day: "Wednesday", time: "8:00–8:30PM", logo: "/images/networks/nta2ch5.png" },
-      { network: "Wazobia Max Lagos", day: "Thursday", time: "6:00–6:30PM", logo: "/images/networks/wazobia-max-lagos.png" },
-      { network: "PRTV Jos (Plateau & Jos)", day: "Thursday", time: "8:30–9:00PM", logo: "/images/networks/prtv-jos.png" },
-      { network: "Wazobia PH", day: "Friday", time: "6:30–7:00PM", logo: "/images/networks/wazobia-ph.png" },
-      { network: "STV", day: "Saturday", time: "11:00–11:30AM", logo: "/images/networks/stv.png" },
-      { network: "Wazobia Max Abuja", day: "Saturday", time: "6:30–7:00PM", logo: "/images/networks/wazobia-max-abuja.png" },
-      { network: "WAPTV", day: "Sunday", time: "5:30–6:00PM", logo: "/images/networks/waptv.png" }
+      { network: "RSTV PH", day: "Monday", time: "7:00–7:30PM", logo: "/images/12.png" },
+      { network: "ITV Benin", day: "Monday", time: "9:30–10:00PM", logo: "/images/11.png" },
+      { network: "EBS TV", day: "Monday", time: "12:00–12:30PM", logo: "/images/13.png" },
+      { network: "OGTV", day: "Tuesday", time: "7:30–8:00PM", logo: "/images/10.png" },
+      { network: "TVC", day: "Tuesday", time: "8:00–8:30PM", logo: "/images/9.png" },
+      { network: "ITV Abuja", day: "Tuesday", time: "8:30–9:00PM", logo: "/images/8.png" },
+      { network: "NTA2CH5", day: "Wednesday", time: "8:00–8:30PM", logo: "/images/7.png" },
+      { network: "Wazobia Max Lagos", day: "Thursday", time: "6:00–6:30PM", logo: "/images/6.png" },
+      { network: "PRTV Jos (Plateau & Jos)", day: "Thursday", time: "8:30–9:00PM", logo: "/images/5.png" },
+      { network: "Wazobia PH", day: "Friday", time: "6:30–7:00PM", logo: "/images/networks/4.png" },
+      { network: "STV", day: "Saturday", time: "11:00–11:30AM", logo: "/images/3.png" },
+      { network: "Wazobia Max Abuja", day: "Saturday", time: "6:30–7:00PM", logo: "/images/2.png" },
+      { network: "WAPTV", day: "Sunday", time: "5:30–6:00PM", logo: "/images/1.png" }
     ]
   }
 ];
