@@ -506,7 +506,7 @@ export default function CareersPage() {
 
               <source
                 media="(max-width: 767px)"
-                srcSet="/images/hero/masterclassm.png"
+                srcSet="/images/hero/ep.jpg"
               />
 
               {/* eslint-disable-next-line @next/next/no-img-element -- native <picture>/<source>
