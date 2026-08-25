@@ -39,8 +39,8 @@ export const heroSlides: HeroSlide[] = [
     description:
       "Stellamaris Chinasa Duru's masterclass for actors, filmmakers, screenwriters, and media entrepreneurs building a career in the industry.",
     cta: { label: "Discover the Masterclass", href: "/#" },
-    image: "/images/hero/masterclass.png",
-    imageMobile: "/images/hero/masterclass.png",
+    image: "/images/hero/ep.jpg",
+    imageMobile: "/images/hero/ep.jpg",
     imageLabel: "The Main Character Journey — Still",
     gradient: "from-[#191512] via-charcoal-950 to-[#241610]"
   },

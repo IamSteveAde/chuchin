@@ -103,10 +103,10 @@ return (
             className="relative h-full w-full"
           >
             <picture className="absolute inset-0 block h-full w-full">
-              <source media="(max-width: 767px)" srcSet="/images/hero/masterclass.png" />
+              <source media="(max-width: 767px)" srcSet="/images/hero/ep.jpg" />
               {/* eslint-disable-next-line @next/next/no-img-element -- native <picture>/<source>
                   art direction isn't supported by next/image; matches the homepage hero. */}
-              <img src="/images/hero/masterclass.png" alt="Chuchin Ultimate Productions" className="h-full w-full object-cover" />
+              <img src="/images/hero/ep.jpg" alt="Chuchin Ultimate Productions" className="h-full w-full object-cover" />
             </picture>
           </motion.div>
 

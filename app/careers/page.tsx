@@ -512,7 +512,7 @@ export default function CareersPage() {
               {/* eslint-disable-next-line @next/next/no-img-element -- native <picture>/<source>
                   art direction isn't supported by next/image; matches the homepage hero. */}
               <img
-                src="/images/hero/masterclass.png"
+                src="/images/hero/ep.jpg"
                 alt="The Main Character Journey"
                 className="h-full w-full object-cover"
               />
