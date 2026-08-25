@@ -19,9 +19,7 @@
     @apply bg-offwhite text-charcoal font-body antialiased;
   }
 
-  h1, h2, h3, h4 {
-    @apply font-display;
-  }
+  
 
   ::selection {
     @apply bg-orange text-offwhite;
@@ -76,4 +74,15 @@ body {
 
 body {
   @apply bg-offwhite text-charcoal font-body antialiased;
+}
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-fraunces), "Fraunces", Georgia, serif !important;
+    font-weight: 400;
+  }
 }

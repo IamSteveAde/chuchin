@@ -506,13 +506,13 @@ export default function CareersPage() {
 
               <source
                 media="(max-width: 767px)"
-                srcSet="/images/hero/ep.jpg"
+                srcSet="/images/hero/sum.png"
               />
 
               {/* eslint-disable-next-line @next/next/no-img-element -- native <picture>/<source>
                   art direction isn't supported by next/image; matches the homepage hero. */}
               <img
-                src="/images/hero/ep.jpg"
+                src="/images/hero/simm.png"
                 alt="The Main Character Journey"
                 className="h-full w-full object-cover"
               />

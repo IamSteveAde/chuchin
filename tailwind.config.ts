@@ -30,8 +30,9 @@ const config: Config = {
         white: "#FFFFFF"
       },
       fontFamily: {
-  display: ["var(--font-sora)", "sans-serif"],
-  body: ["var(--font-body)", "sans-serif"]
+  display: ["var(--font-fraunces)", "serif"],
+  body: ["var(--font-body)", "sans-serif"],
+  ui: ["var(--font-sora)", "sans-serif"],
 },
       fontSize: {
         "display-xl": ["clamp(3.5rem, 8vw, 8rem)", { lineHeight: "0.95", letterSpacing: "-0.02em" }],
