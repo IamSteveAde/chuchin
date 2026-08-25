@@ -27,7 +27,7 @@ export const heroSlides: HeroSlide[] = [
       "An award-winning Nigerian production company creating films, dramas, and digital content that celebrate family, culture, and resilience.",
     cta: { label: "Learn Our Story", href: "/#" },
     image: "/images/hero/tot.png",
-    imageMobile: "/images/hero/totm.png",
+    imageMobile: "/images/hero/award.jpg",
     imageLabel: "Chuchin Ultimate Productions",
     gradient: "from-[#1e1a16] via-charcoal-950 to-[#221407]"
   },
@@ -37,10 +37,10 @@ export const heroSlides: HeroSlide[] = [
     title: "Every creative",
     titleAccent: "has an edge to find.",
     description:
-      "Stellamaris Duru's masterclass for actors, filmmakers, screenwriters, and media entrepreneurs building a career in the industry.",
+      "Stellamaris Chinasa Duru's masterclass for actors, filmmakers, screenwriters, and media entrepreneurs building a career in the industry.",
     cta: { label: "Discover the Masterclass", href: "/#" },
     image: "/images/hero/masterclass.png",
-    imageMobile: "/images/hero/masterclassm.png",
+    imageMobile: "/images/hero/masterclass.png",
     imageLabel: "The Main Character Journey — Still",
     gradient: "from-[#191512] via-charcoal-950 to-[#241610]"
   },
@@ -53,7 +53,7 @@ export const heroSlides: HeroSlide[] = [
       "A Nollywood drama of love, ambition, and the loyalty that holds a family together across two acclaimed seasons.",
     cta: { label: "Watch the Story", href: "/#" },
     image: "/images/hero/tot.png",
-    imageMobile: "/images/hero/totm.png",
+    imageMobile: "/images/hero/award.jpg",
     imageLabel: "Sands of Time — Still",
     gradient: "from-[#1c1815] via-charcoal-950 to-[#2a1508]"
   },
@@ -66,7 +66,7 @@ export const heroSlides: HeroSlide[] = [
       "The season that opened Sands of Time to the world — ambition meeting the pull of home.",
     cta: { label: "Explore Season One", href: "/#" },
     image: "/images/hero/agl.png",
-    imageMobile: "/images/hero/aglm.png",
+    imageMobile: "/images/hero/ep.jpg",
     imageLabel: "Affiong Go Lagos — Still",
     gradient: "from-[#1a1611] via-charcoal-950 to-[#231a0a]"
   },

@@ -1,5 +1,5 @@
 export const founder = {
-  name: "Stellamaris Duru",
+  name: "Stellamaris Chinasa Duru",
   title: "Founder & Chief Executive Officer",
   quote:
     "I make films that celebrate who we are — family, culture, resilience, and hope.",
@@ -11,8 +11,8 @@ export const founder = {
 
 export const masterclass = {
   name: "The Main Character Journey",
-  convener: "Stellamaris Duru",
+  convener: "Stellamaris Chinasa Duru",
   description:
-    "A creative masterclass convened by Stellamaris Duru to empower aspiring actors, filmmakers, screenwriters, and media entrepreneurs to discover their unique creative edge and build sustainable careers in the industry.",
+    "A creative masterclass convened by Stellamaris Chinasa Duru to empower aspiring actors, filmmakers, screenwriters, and media entrepreneurs to discover their unique creative edge and build sustainable careers in the industry.",
   cta: "Register Your Interest"
 };

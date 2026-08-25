@@ -2,7 +2,7 @@ export const company = {
   name: "Chuchin Ultimate Productions Ltd.",
   shortName: "Chuchin Ultimate Productions",
   tagline: "Authentic African stories, told with craft.",
-  bio: "Chuchin Ultimate Productions Ltd. is an award-winning Nigerian film and media production company dedicated to telling authentic African stories that entertain, educate, and inspire. Founded by Stellamaris Duru, the company creates films, television dramas, web series, and digital content that celebrate family values, culture, resilience, and hope.",
+  bio: "Chuchin Ultimate Productions Ltd. is an award-winning Nigerian film and media production company dedicated to telling authentic African stories that entertain, educate, and inspire. Founded by Stellamaris Chinasa Duru, the company creates films, television dramas, web series, and digital content that celebrate family values, culture, resilience, and hope.",
   extendedBio:
     "Its acclaimed productions include Sands of Time, featuring Affiong Go Lagos and We Happy People, which have earned recognition for their storytelling and production quality. Beyond filmmaking, the company continues to invest in developing the creative industry through education, mentorship, and community-building initiatives.",
   contact: {
@@ -26,5 +26,6 @@ export const recognitions = [
   { award: "Best Actress — Affiong Go Lagos", festival: "NEMCEA", note: "Winner" },
   { award: "Best Television Series", festival: "TINFF", note: "Nomination" },
   { award: "Best Television Series (Drama)", festival: "TICAFF", note: "Selected" },
+  { award: "Best Actress for Affiong go Lagos", festival: "NEMCA", note: "Winner" },
   { award: "Best Television Series (Drama)", festival: "BINFF", note: "Selected" }
 ];

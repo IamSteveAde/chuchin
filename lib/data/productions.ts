@@ -3,8 +3,24 @@ export type Season = {
   title: string;
   synopsis: string;
   poster: string;
-  /** YouTube video ID (the part after /embed/ or ?v=), e.g. "Y_6D-x9NdjI". */
+  /** Trailer/teaser YouTube video ID — used for the homepage's autoplaying panel. */
   youtubeId?: string;
+  /** Full episode/movie YouTube video ID — used on the production detail page. */
+  fullEpisodeYoutubeId?: string;
+  /** Path to a locally-hosted full episode/movie video file (e.g. /images/happy.mp4).
+   *  Used instead of fullEpisodeYoutubeId when the episode isn't on YouTube —
+   *  rendered as a real <video> tag rather than an iframe. */
+  localVideoSrc?: string;
+};
+
+export type BroadcastSlot = {
+  network: string;
+  day: "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday";
+  time: string;
+  /** Path to the network's logo. Drop the real file at this path and it
+   *  swaps in automatically; until then, a placeholder with the network's
+   *  initials shows instead. */
+  logo?: string;
 };
 
 export type Production = {
@@ -19,6 +35,8 @@ export type Production = {
   seasons: Season[];
   gallery: string[];
   awards: string[];
+  /** Linear TV broadcast schedule — where and when the show airs. */
+  broadcastSchedule?: BroadcastSlot[];
 };
 
 export const productions: Production[] = [
@@ -31,7 +49,7 @@ export const productions: Production[] = [
     poster: "/images/productions/sands-of-time/poster.jpg",
     trailerUrl: undefined,
     cast: [],
-    crew: [{ role: "Executive Producer", name: "Stellamaris Duru" }],
+    crew: [],
     seasons: [
       {
         slug: "affiong-go-lagos",
@@ -39,7 +57,8 @@ export const productions: Production[] = [
         synopsis:
           "The first season of Sands of Time, following the family's story as it begins to unfold in Lagos.",
         poster: "/images/productions/affiong-go-lagos/poster.jpg",
-        youtubeId: "Y_6D-x9NdjI"
+        youtubeId: "Y_6D-x9NdjI",
+        fullEpisodeYoutubeId: "fMHjYLxT0AU"
       },
       {
         slug: "we-happy-people",
@@ -47,7 +66,8 @@ export const productions: Production[] = [
         synopsis:
           "The second season of Sands of Time, deepening the drama, ambition, and resilience of the family at its heart.",
         poster: "/images/productions/we-happy-people/poster.jpg",
-        youtubeId: "axUFFszPm4U"
+        youtubeId: "axUFFszPm4U",
+        localVideoSrc: "/images/happy.mp4"
       }
     ],
     gallery: [],
@@ -55,6 +75,21 @@ export const productions: Production[] = [
       "Nominated — Best Television Series, TINFF",
       "Selected — Best Television Series (Drama), TICAFF",
       "Selected — Best Television Series (Drama), BINFF"
+    ],
+    broadcastSchedule: [
+      { network: "RSTV PH", day: "Monday", time: "7:00–7:30PM", logo: "/images/networks/rstv-ph.png" },
+      { network: "ITV Benin", day: "Monday", time: "9:30–10:00PM", logo: "/images/networks/itv-benin.png" },
+      { network: "EBS TV", day: "Monday", time: "12:00–12:30PM", logo: "/images/networks/ebs-tv.png" },
+      { network: "OGTV", day: "Tuesday", time: "7:30–8:00PM", logo: "/images/networks/ogtv.png" },
+      { network: "TVC", day: "Tuesday", time: "8:00–8:30PM", logo: "/images/networks/tvc.png" },
+      { network: "ITV Abuja", day: "Tuesday", time: "8:30–9:00PM", logo: "/images/networks/itv-abuja.png" },
+      { network: "NTA2CH5", day: "Wednesday", time: "8:00–8:30PM", logo: "/images/networks/nta2ch5.png" },
+      { network: "Wazobia Max Lagos", day: "Thursday", time: "6:00–6:30PM", logo: "/images/networks/wazobia-max-lagos.png" },
+      { network: "PRTV Jos (Plateau & Jos)", day: "Thursday", time: "8:30–9:00PM", logo: "/images/networks/prtv-jos.png" },
+      { network: "Wazobia PH", day: "Friday", time: "6:30–7:00PM", logo: "/images/networks/wazobia-ph.png" },
+      { network: "STV", day: "Saturday", time: "11:00–11:30AM", logo: "/images/networks/stv.png" },
+      { network: "Wazobia Max Abuja", day: "Saturday", time: "6:30–7:00PM", logo: "/images/networks/wazobia-max-abuja.png" },
+      { network: "WAPTV", day: "Sunday", time: "5:30–6:00PM", logo: "/images/networks/waptv.png" }
     ]
   }
 ];

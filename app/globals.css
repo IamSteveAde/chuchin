@@ -60,3 +60,20 @@
     transform: translateX(-50%);
   }
 }
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  /* Safety net: a stray decorative element (large offset icons/glows
+     used throughout the site) sticking a few pixels past the right
+     edge would otherwise make the whole page horizontally scrollable.
+     This doesn't affect position: fixed elements — only an ancestor
+     transform/filter/perspective changes their containing block. */
+  overflow-x: hidden;
+}
+
+body {
+  @apply bg-offwhite text-charcoal font-body antialiased;
+}

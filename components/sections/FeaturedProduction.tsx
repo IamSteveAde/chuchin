@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import ApertureIcon from "../ui/ApertureIcon";
-import { productions } from "@/lib/data/productions";
+import { productions, type Season } from "@/lib/data/productions";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -24,6 +24,14 @@ function embedUrl(youtubeId: string) {
 
 function watchUrl(youtubeId: string) {
   return `https://www.youtube.com/watch?v=${youtubeId}`;
+}
+
+// Where clicking a panel should go: a local video has no external page, so
+// it opens the internal production/season anchor instead of a YouTube tab.
+function seasonHref(flagshipSlug: string, season: Season) {
+  if (season.localVideoSrc) return `/productions/${flagshipSlug}#${season.slug}`;
+  if (season.youtubeId) return watchUrl(season.youtubeId);
+  return `/productions/${flagshipSlug}#${season.slug}`;
 }
 
 export default function FeaturedProduction() {
@@ -67,62 +75,86 @@ export default function FeaturedProduction() {
             </div>
           </div>
 
-          {flagship.seasons.map((season, i) => (
-            <motion.a
-              key={season.slug}
-              href={season.youtubeId ? watchUrl(season.youtubeId) : `/productions/${flagship.slug}#${season.slug}`}
-              target={season.youtubeId ? "_blank" : undefined}
-              rel={season.youtubeId ? "noopener noreferrer" : undefined}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.8, delay: i * 0.15, ease }}
-              className={`group relative block aspect-[4/5] overflow-hidden rounded-[1.75rem] border border-offwhite/10 bg-charcoal shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)] transition-transform duration-500 ease-cinematic hover:-translate-y-1 ${
-                i === 0 ? "lg:rotate-[-1deg]" : "lg:mt-14 lg:rotate-[1deg]"
-              }`}
-              style={{ clipPath: "polygon(0 0, 100% 0, 100% 91%, 92% 100%, 0 100%)" }}
-            >
-              {season.youtubeId ? (
-                <>
-                  <iframe
-                    src={embedUrl(season.youtubeId)}
-                    title={season.title}
-                    loading="lazy"
-                    allow="autoplay; encrypted-media; picture-in-picture"
-                    className="pointer-events-none absolute inset-0 h-full w-full scale-[1.35] object-cover"
-                  />
-                  {/* Muted indicator — same HUD-chip language as the About slideshow */}
-                  <div className="pointer-events-none absolute right-4 top-4 z-10 flex items-center gap-1.5 rounded-full border border-offwhite/15 bg-charcoal/70 px-3 py-1.5 backdrop-blur-sm">
-                    <svg viewBox="0 0 24 24" className="h-3 w-3 fill-none stroke-offwhite/80" strokeWidth={1.8}>
-                      <path d="M11 5 6 9H3v6h3l5 4V5Z" strokeLinejoin="round" />
-                      <path d="M17 9l4 6M21 9l-4 6" strokeLinecap="round" />
-                    </svg>
-                    <span className="font-mono text-[10px] tracking-wider text-offwhite/80">MUTED</span>
+          {flagship.seasons.map((season, i) => {
+            const isExternal = Boolean(season.youtubeId) && !season.localVideoSrc;
+            return (
+              <motion.a
+                key={season.slug}
+                href={seasonHref(flagship.slug, season)}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.8, delay: i * 0.15, ease }}
+                className={`group relative block aspect-[4/5] overflow-hidden rounded-[1.75rem] border border-offwhite/10 bg-charcoal shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)] transition-transform duration-500 ease-cinematic hover:-translate-y-1 ${
+                  i === 0 ? "lg:rotate-[-1deg]" : "lg:mt-14 lg:rotate-[1deg]"
+                }`}
+                style={{ clipPath: "polygon(0 0, 100% 0, 100% 91%, 92% 100%, 0 100%)" }}
+              >
+                {season.localVideoSrc ? (
+                  <>
+                    {/* eslint-disable-next-line jsx-a11y/media-has-caption -- silent
+                        autoplaying preview, not primary viewing content */}
+                    <video
+                      src={season.localVideoSrc}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+                    />
+                    <div className="pointer-events-none absolute right-4 top-4 z-10 flex items-center gap-1.5 rounded-full border border-offwhite/15 bg-charcoal/70 px-3 py-1.5 backdrop-blur-sm">
+                      <svg viewBox="0 0 24 24" className="h-3 w-3 fill-none stroke-offwhite/80" strokeWidth={1.8}>
+                        <path d="M11 5 6 9H3v6h3l5 4V5Z" strokeLinejoin="round" />
+                        <path d="M17 9l4 6M21 9l-4 6" strokeLinecap="round" />
+                      </svg>
+                      <span className="font-mono text-[10px] tracking-wider text-offwhite/80">MUTED</span>
+                    </div>
+                  </>
+                ) : season.youtubeId ? (
+                  <>
+                    <iframe
+                      src={embedUrl(season.youtubeId)}
+                      title={season.title}
+                      loading="lazy"
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                      className="pointer-events-none absolute inset-0 h-full w-full scale-[1.35] object-cover"
+                    />
+                    {/* Muted indicator — same HUD-chip language as the About slideshow */}
+                    <div className="pointer-events-none absolute right-4 top-4 z-10 flex items-center gap-1.5 rounded-full border border-offwhite/15 bg-charcoal/70 px-3 py-1.5 backdrop-blur-sm">
+                      <svg viewBox="0 0 24 24" className="h-3 w-3 fill-none stroke-offwhite/80" strokeWidth={1.8}>
+                        <path d="M11 5 6 9H3v6h3l5 4V5Z" strokeLinejoin="round" />
+                        <path d="M17 9l4 6M21 9l-4 6" strokeLinecap="round" />
+                      </svg>
+                      <span className="font-mono text-[10px] tracking-wider text-offwhite/80">MUTED</span>
+                    </div>
+                  </>
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-br from-charcoal-800 to-charcoal-950" />
+                )}
+
+                {/* Hover scrim + on-brand "play" cue, in place of a generic triangle icon */}
+                <div className="absolute inset-0 bg-charcoal/15 transition-colors duration-500 ease-cinematic group-hover:bg-charcoal/40" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 ease-cinematic group-hover:opacity-100">
+                  <div className="flex flex-col items-center gap-3">
+                    <ApertureIcon size={44} spin open={false} />
+                    <span className="text-[11px] font-medium uppercase tracking-[0.25em] text-offwhite">
+                      {isExternal ? "Watch on YouTube ↗" : "View Production"}
+                    </span>
                   </div>
-                </>
-              ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-charcoal-800 to-charcoal-950" />
-              )}
-
-              {/* Hover scrim + on-brand "play" cue, in place of a generic triangle icon */}
-              <div className="absolute inset-0 bg-charcoal/15 transition-colors duration-500 ease-cinematic group-hover:bg-charcoal/40" />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 ease-cinematic group-hover:opacity-100">
-                <div className="flex flex-col items-center gap-3">
-                  <ApertureIcon size={44} spin open={false} />
-                  <span className="text-[11px] font-medium uppercase tracking-[0.25em] text-offwhite">
-                    Watch on YouTube ↗
-                  </span>
                 </div>
-              </div>
 
-              {/* Bottom caption */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/95 via-charcoal/40 to-transparent p-6 pt-16">
-                <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-orange">Season {i + 1}</p>
-                <h3 className="mt-2 font-body text-2xl font-light tracking-tight text-offwhite">{season.title}</h3>
-                <p className="mt-2 max-w-xs text-sm font-light leading-relaxed text-offwhite/55">{season.synopsis}</p>
-              </div>
-            </motion.a>
-          ))}
+                {/* Bottom caption */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/95 via-charcoal/40 to-transparent p-6 pt-16">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-orange">Season {i + 1}</p>
+                  <h3 className="mt-2 font-body text-2xl font-light tracking-tight text-offwhite">{season.title}</h3>
+                  <p className="mt-2 max-w-xs text-sm font-light leading-relaxed text-offwhite/55">{season.synopsis}</p>
+                </div>
+              </motion.a>
+            );
+          })}
         </div>
 
         {/* ---- Supporting synopsis + CTA ---- */}
@@ -135,7 +167,7 @@ export default function FeaturedProduction() {
         >
           <p className="text-base font-light leading-relaxed text-offwhite/60">{flagship.synopsis}</p>
           <Link
-            href={`#`}
+            href={`/productions/${flagship.slug}`}
             className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-offwhite"
           >
             <span className="relative">
