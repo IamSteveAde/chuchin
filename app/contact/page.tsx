@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import ApertureIcon from "@/components/ui/ApertureIcon";
 import { company } from "@/lib/data/company";
 
@@ -234,16 +233,25 @@ const infoCards = [
 ============================================================ */
 
 function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
-
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
 
+    // Honeypot: if this hidden field is filled, it's a bot — silently drop.
     if (formData.get("company-site")) return;
 
-    setSubmitted(true);
+    const name = (formData.get("name") as string) ?? "";
+    const email = (formData.get("email") as string) ?? "";
+    const subject = (formData.get("subject") as string) ?? "";
+    const message = (formData.get("message") as string) ?? "";
+
+    // Opens the visitor's own email app with the message pre-filled,
+    // addressed to the studio. No backend, no success screen — the
+    // form just hands off to their mail app.
+    const mailSubject = encodeURIComponent(subject || `New message from ${name}`);
+    const mailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+    window.location.href = `mailto:${company.contact.email}?subject=${mailSubject}&body=${mailBody}`;
   }
 
   const inputClasses =
@@ -259,185 +267,133 @@ function ContactForm() {
 
       <div className="relative p-7 md:p-10 lg:p-14">
 
-        <AnimatePresence mode="wait">
+        <form onSubmit={handleSubmit}>
+          {/* Honeypot */}
+          <input
+            type="text"
+            name="company-site"
+            tabIndex={-1}
+            autoComplete="off"
+            className="hidden"
+            aria-hidden="true"
+          />
 
-          {submitted ? (
-            <motion.div
-              key="success"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease }}
-              className="flex min-h-[520px] flex-col justify-center"
-            >
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-orange to-gold">
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-6 w-6 fill-none stroke-offwhite"
-                  strokeWidth={2.2}
-                >
-                  <path
-                    d="M5 13l4 4 10-10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-
-              <p className="mt-9 font-body text-3xl font-light tracking-tight text-charcoal md:text-4xl">
-                Message received.
+          <div className="mb-12 flex items-start justify-between">
+            <div>
+              <p className="text-[9px] uppercase tracking-[0.3em] text-charcoal/40">
+                Contact Form
               </p>
 
-              <p className="mt-4 max-w-md text-sm font-light leading-relaxed text-charcoal/55">
-                Thank you for reaching out. We&apos;ll review your
-                message and respond to the email you provided.
-              </p>
+              <h3 className="mt-4 max-w-lg font-body text-3xl font-light leading-tight tracking-tight text-charcoal md:text-4xl">
+                Tell us what you&apos;re thinking.
+              </h3>
+            </div>
 
-              <button
-                type="button"
-                onClick={() => setSubmitted(false)}
-                className="mt-8 w-fit border-b border-charcoal/20 pb-1 text-[10px] uppercase tracking-[0.2em] text-charcoal/60 transition-colors hover:text-orange"
+            <span className="hidden text-orange sm:block">
+              <ArrowUpRight />
+            </span>
+          </div>
+
+          {/* Name / Email */}
+          <div className="grid gap-x-10 sm:grid-cols-2">
+
+            <div>
+              <label
+                htmlFor="c-name"
+                className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
               >
-                Send another message
-              </button>
-            </motion.div>
-          ) : (
-            <motion.form
-              key="form"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.35 }}
-              onSubmit={handleSubmit}
-            >
-              {/* Honeypot */}
+                Your Name
+              </label>
+
               <input
+                id="c-name"
+                name="name"
                 type="text"
-                name="company-site"
-                tabIndex={-1}
-                autoComplete="off"
-                className="hidden"
-                aria-hidden="true"
+                required
+                className={inputClasses}
+                placeholder="Full name"
               />
+            </div>
 
-              <div className="mb-12 flex items-start justify-between">
-                <div>
-                  <p className="text-[9px] uppercase tracking-[0.3em] text-charcoal/40">
-                    Contact Form
-                  </p>
+            <div className="mt-7 sm:mt-0">
+              <label
+                htmlFor="c-email"
+                className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
+              >
+                Email Address
+              </label>
 
-                  <h3 className="mt-4 max-w-lg font-body text-3xl font-light leading-tight tracking-tight text-charcoal md:text-4xl">
-                    Tell us what you&apos;re thinking.
-                  </h3>
-                </div>
+              <input
+                id="c-email"
+                name="email"
+                type="email"
+                required
+                className={inputClasses}
+                placeholder="you@email.com"
+              />
+            </div>
 
-                <span className="hidden text-orange sm:block">
-                  <ArrowUpRight />
-                </span>
-              </div>
+          </div>
 
-              {/* Name / Email */}
-              <div className="grid gap-x-10 sm:grid-cols-2">
+          {/* Subject */}
+          <div className="mt-8">
+            <label
+              htmlFor="c-subject"
+              className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
+            >
+              Subject
+            </label>
 
-                <div>
-                  <label
-                    htmlFor="c-name"
-                    className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
-                  >
-                    Your Name
-                  </label>
+            <input
+              id="c-subject"
+              name="subject"
+              type="text"
+              required
+              className={inputClasses}
+              placeholder="What would you like to talk about?"
+            />
+          </div>
 
-                  <input
-                    id="c-name"
-                    name="name"
-                    type="text"
-                    required
-                    className={inputClasses}
-                    placeholder="Full name"
-                  />
-                </div>
+          {/* Message */}
+          <div className="mt-8">
+            <label
+              htmlFor="c-message"
+              className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
+            >
+              Your Message
+            </label>
 
-                <div className="mt-7 sm:mt-0">
-                  <label
-                    htmlFor="c-email"
-                    className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
-                  >
-                    Email Address
-                  </label>
+            <textarea
+              id="c-message"
+              name="message"
+              required
+              rows={5}
+              className={`${inputClasses} resize-none`}
+              placeholder="Tell us what's on your mind..."
+            />
+          </div>
 
-                  <input
-                    id="c-email"
-                    name="email"
-                    type="email"
-                    required
-                    className={inputClasses}
-                    placeholder="you@email.com"
-                  />
-                </div>
+          {/* Button */}
+          <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
 
-              </div>
+            <button
+              type="submit"
+              className="group inline-flex w-fit items-center gap-6 border border-charcoal bg-charcoal px-8 py-4 text-[10px] font-medium uppercase tracking-[0.2em] text-offwhite transition-all duration-300 hover:bg-gradient-to-r hover:from-orange hover:to-gold hover:text-charcoal"
+            >
+              <span>Send Message</span>
 
-              {/* Subject */}
-              <div className="mt-8">
-                <label
-                  htmlFor="c-subject"
-                  className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
-                >
-                  Subject
-                </label>
+              <span className="transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
+            </button>
 
-                <input
-                  id="c-subject"
-                  name="subject"
-                  type="text"
-                  required
-                  className={inputClasses}
-                  placeholder="What would you like to talk about?"
-                />
-              </div>
+            <p className="max-w-xs text-[10px] font-light leading-relaxed text-charcoal/35">
+              This opens your own email app with the message ready to send —
+              no data passes through us until you hit send yourself.
+            </p>
 
-              {/* Message */}
-              <div className="mt-8">
-                <label
-                  htmlFor="c-message"
-                  className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
-                >
-                  Your Message
-                </label>
-
-                <textarea
-                  id="c-message"
-                  name="message"
-                  required
-                  rows={5}
-                  className={`${inputClasses} resize-none`}
-                  placeholder="Tell us what's on your mind..."
-                />
-              </div>
-
-              {/* Button */}
-              <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-
-                <button
-                  type="submit"
-                  className="group inline-flex w-fit items-center gap-6 border border-charcoal bg-charcoal px-8 py-4 text-[10px] font-medium uppercase tracking-[0.2em] text-offwhite transition-all duration-300 hover:bg-gradient-to-r hover:from-orange hover:to-gold hover:text-charcoal"
-                >
-                  <span>Send Message</span>
-
-                  <span className="transition-transform duration-300 group-hover:translate-x-1">
-                    →
-                  </span>
-                </button>
-
-                <p className="max-w-xs text-[10px] font-light leading-relaxed text-charcoal/35">
-                  We read every message personally and aim to respond
-                  within a few business days.
-                </p>
-
-              </div>
-            </motion.form>
-          )}
-
-        </AnimatePresence>
+          </div>
+        </form>
       </div>
     </div>
   );

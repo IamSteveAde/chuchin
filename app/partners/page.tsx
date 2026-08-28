@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import ApertureIcon from "@/components/ui/ApertureIcon";
 import { company, recognitions } from "@/lib/data/company";
 
@@ -144,8 +143,6 @@ const festivals = Array.from(
 ------------------------------------------------------------- */
 
 function PartnershipForm() {
-  const [submitted, setSubmitted] = useState(false);
-
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -153,7 +150,20 @@ function PartnershipForm() {
 
     if (formData.get("company-site")) return;
 
-    setSubmitted(true);
+    const name = (formData.get("name") as string) ?? "";
+    const organization = (formData.get("organization") as string) ?? "";
+    const email = (formData.get("email") as string) ?? "";
+    const interest = (formData.get("interest") as string) ?? "";
+    const message = (formData.get("message") as string) ?? "";
+
+    // Opens the visitor's own email app with the message pre-filled,
+    // addressed to the studio. No backend, no success screen — the
+    // form just hands off to their mail app.
+    const subject = encodeURIComponent(`Partnership Inquiry: ${interest || "General"}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nOrganization: ${organization}\nEmail: ${email}\nPartnership Interest: ${interest}\n\nMessage:\n${message}`
+    );
+    window.location.href = `mailto:${company.contact.email}?subject=${subject}&body=${body}`;
   }
 
   const inputClasses =
@@ -169,187 +179,144 @@ function PartnershipForm() {
 
       <div className="relative p-7 md:p-10 lg:p-12">
 
-        <AnimatePresence mode="wait">
-          {submitted ? (
-            <motion.div
-              key="success"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease }}
-              className="flex min-h-[430px] flex-col justify-center"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-orange to-gold">
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-5 w-5 fill-none stroke-offwhite"
-                  strokeWidth={2.2}
-                >
-                  <path
-                    d="M5 13l4 4 10-10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
+        <form onSubmit={handleSubmit} className="relative">
+          <input
+            type="text"
+            name="company-site"
+            tabIndex={-1}
+            autoComplete="off"
+            className="hidden"
+            aria-hidden="true"
+          />
 
-              <p className="mt-8 font-body text-3xl font-light tracking-tight text-charcoal">
-                Conversation started.
+          <div className="mb-10 flex items-start justify-between">
+            <div>
+              <p className="text-[9px] font-medium uppercase tracking-[0.3em] text-charcoal/40">
+                Partnership Inquiry
               </p>
 
-              <p className="mt-4 max-w-md text-sm font-light leading-relaxed text-charcoal/55">
-                Thank you for reaching out. We&apos;ll review your
-                inquiry and get back to you at the email you provided.
-              </p>
-            </motion.div>
-          ) : (
-            <motion.form
-              key="form"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.35 }}
-              onSubmit={handleSubmit}
-              className="relative"
-            >
-              <input
-                type="text"
-                name="company-site"
-                tabIndex={-1}
-                autoComplete="off"
-                className="hidden"
-                aria-hidden="true"
-              />
+              <h3 className="mt-3 max-w-sm font-body text-2xl font-light tracking-tight text-charcoal md:text-3xl">
+                Let&apos;s make something worth remembering.
+              </h3>
+            </div>
 
-              <div className="mb-10 flex items-start justify-between">
-                <div>
-                  <p className="text-[9px] font-medium uppercase tracking-[0.3em] text-charcoal/40">
-                    Partnership Inquiry
-                  </p>
+            <span className="text-orange">
+              <ArrowUpRight />
+            </span>
+          </div>
 
-                  <h3 className="mt-3 max-w-sm font-body text-2xl font-light tracking-tight text-charcoal md:text-3xl">
-                    Let&apos;s make something worth remembering.
-                  </h3>
-                </div>
-
-                <span className="text-orange">
-                  <ArrowUpRight />
-                </span>
-              </div>
-
-              <div className="grid gap-x-8 sm:grid-cols-2">
-                <div>
-                  <label
-                    htmlFor="p-name"
-                    className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
-                  >
-                    Name
-                  </label>
-
-                  <input
-                    id="p-name"
-                    name="name"
-                    type="text"
-                    required
-                    className={inputClasses}
-                    placeholder="Your full name"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="p-org"
-                    className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
-                  >
-                    Organization
-                  </label>
-
-                  <input
-                    id="p-org"
-                    name="organization"
-                    type="text"
-                    className={inputClasses}
-                    placeholder="Company or brand"
-                  />
-                </div>
-              </div>
-
-              <div className="mt-7 grid gap-x-8 sm:grid-cols-2">
-                <div>
-                  <label
-                    htmlFor="p-email"
-                    className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
-                  >
-                    Email
-                  </label>
-
-                  <input
-                    id="p-email"
-                    name="email"
-                    type="email"
-                    required
-                    className={inputClasses}
-                    placeholder="you@company.com"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="p-interest"
-                    className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
-                  >
-                    Partnership
-                  </label>
-
-                  <select
-                    id="p-interest"
-                    name="interest"
-                    required
-                    className={`${inputClasses} cursor-pointer appearance-none`}
-                  >
-                    <option value="">Select an area</option>
-
-                    {opportunities.map((o) => (
-                      <option key={o.title} value={o.title}>
-                        {o.title}
-                      </option>
-                    ))}
-
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="mt-7">
-                <label
-                  htmlFor="p-message"
-                  className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
-                >
-                  Message
-                </label>
-
-                <textarea
-                  id="p-message"
-                  name="message"
-                  required
-                  rows={4}
-                  className={`${inputClasses} resize-none`}
-                  placeholder="Tell us what you have in mind"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="group mt-9 inline-flex items-center gap-5 border border-charcoal bg-charcoal px-7 py-4 text-[11px] font-medium uppercase tracking-[0.18em] text-offwhite transition-all duration-300 hover:bg-gradient-to-r hover:from-orange hover:to-gold hover:text-charcoal"
+          <div className="grid gap-x-8 sm:grid-cols-2">
+            <div>
+              <label
+                htmlFor="p-name"
+                className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
               >
-                <span>Start a Conversation</span>
+                Name
+              </label>
 
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </button>
-            </motion.form>
-          )}
-        </AnimatePresence>
+              <input
+                id="p-name"
+                name="name"
+                type="text"
+                required
+                className={inputClasses}
+                placeholder="Your full name"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="p-org"
+                className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
+              >
+                Organization
+              </label>
+
+              <input
+                id="p-org"
+                name="organization"
+                type="text"
+                className={inputClasses}
+                placeholder="Company or brand"
+              />
+            </div>
+          </div>
+
+          <div className="mt-7 grid gap-x-8 sm:grid-cols-2">
+            <div>
+              <label
+                htmlFor="p-email"
+                className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
+              >
+                Email
+              </label>
+
+              <input
+                id="p-email"
+                name="email"
+                type="email"
+                required
+                className={inputClasses}
+                placeholder="you@company.com"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="p-interest"
+                className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
+              >
+                Partnership
+              </label>
+
+              <select
+                id="p-interest"
+                name="interest"
+                required
+                className={`${inputClasses} cursor-pointer appearance-none`}
+              >
+                <option value="">Select an area</option>
+
+                {opportunities.map((o) => (
+                  <option key={o.title} value={o.title}>
+                    {o.title}
+                  </option>
+                ))}
+
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="mt-7">
+            <label
+              htmlFor="p-message"
+              className="text-[9px] font-medium uppercase tracking-[0.2em] text-charcoal/40"
+            >
+              Message
+            </label>
+
+            <textarea
+              id="p-message"
+              name="message"
+              required
+              rows={4}
+              className={`${inputClasses} resize-none`}
+              placeholder="Tell us what you have in mind"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="group mt-9 inline-flex items-center gap-5 border border-charcoal bg-charcoal px-7 py-4 text-[11px] font-medium uppercase tracking-[0.18em] text-offwhite transition-all duration-300 hover:bg-gradient-to-r hover:from-orange hover:to-gold hover:text-charcoal"
+          >
+            <span>Start a Conversation</span>
+
+            <span className="transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+          </button>
+        </form>
       </div>
     </div>
   );
@@ -772,8 +739,8 @@ export default function PartnersPage() {
                   Or email us directly
                 </p>
 
-                
-                  <a href={`mailto:${company.contact.email}?subject=Partnership%20Inquiry`}
+                <a
+                  href={`mailto:${company.contact.email}?subject=Partnership%20Inquiry`}
                   className="group mt-3 inline-flex items-center gap-3 border-b border-charcoal/15 pb-2 text-sm font-medium text-charcoal"
                 >
                   <span>{company.contact.email}</span>
@@ -825,8 +792,8 @@ export default function PartnersPage() {
             </h2>
 
             <div className="mt-10 flex justify-center">
-              
-                <a href={`mailto:${company.contact.email}?subject=Partnership%20Inquiry`}
+              <a
+                href={`mailto:${company.contact.email}?subject=Partnership%20Inquiry`}
                 className="group inline-flex items-center gap-6 border border-charcoal bg-charcoal px-8 py-4 text-[10px] uppercase tracking-[0.2em] text-offwhite transition-all duration-300 hover:bg-gradient-to-r hover:from-orange hover:to-gold hover:text-charcoal"
               >
                 <span>Get in touch</span>
