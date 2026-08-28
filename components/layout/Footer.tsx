@@ -63,6 +63,10 @@ const socialGroups = [
     description: "Filmmaker · Producer · Storyteller",
     links: [
       {
+        label: "Instagram",
+        href: "https://www.instagram.com/stellamarisduru_smd?igsi=bWU5NnU1aXBwN3o4&utm_source=qr",
+      },
+      {
         label: "Facebook",
         href: "https://www.facebook.com/stellamaris.duru.54?mibextid=wwXIfr",
       },
