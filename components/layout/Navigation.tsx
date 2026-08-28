@@ -10,9 +10,10 @@ import ApertureIcon from "../ui/ApertureIcon";
 const links = [
   { href: "/about", label: "About" },
   { href: "/productions", label: "Productions" },
-
+{ href: "/masterclass", label: "Masterclass" },
   { href: "/partners", label: "Partners" },
   { href: "/careers", label: "Careers" },
+  { href: "/founder", label: "Founder" },
  
   { href: "/contact", label: "Contact" },
 ];

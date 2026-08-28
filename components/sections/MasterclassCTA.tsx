@@ -90,7 +90,7 @@ export default function MasterclassCTA() {
             {masterclass.description}
           </p>
 
-          <Button href="/#" variant="ghost" className="mt-10 border-offwhite/25">
+          <Button href="/masterclass" variant="ghost" className="mt-10 border-offwhite/25">
             {masterclass.cta}
           </Button>
         </motion.div>
