@@ -41,12 +41,28 @@ export const metadata: Metadata = {
 
   description: company.bio,
 
-  metadataBase: new URL("https://chuchinultimate.com"),
+  metadataBase: new URL("https://chuchinultimateproduction.com"),
 
   openGraph: {
     title: company.shortName,
     description: company.bio,
+    url: "https://chuchinultimateproduction.com",
+    siteName: company.shortName,
     type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/images/hero/tot.png",
+        alt: company.shortName,
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: company.shortName,
+    description: company.bio,
+    images: ["/images/hero/tot.png"],
   },
 };
 
